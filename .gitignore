@@ -1,0 +1,11 @@
+# Archivos sensibles
+.env
+config/db.js
+
+# Dependencias de Node.js
+node_modules/
+package-lock.json
+
+# Logs y caché
+logs/
+*.log
