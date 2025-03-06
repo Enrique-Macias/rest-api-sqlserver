@@ -24,11 +24,13 @@ app.get("/ping", (req, res) => {
 // Importar rutas
 const itemsRoutes = require("./routes/items");
 const loginRoutes = require("./routes/login");
+const mongoItemsRoutes = require("./routes/mongoItems");
 
 app.use("/items", itemsRoutes);
 app.use("/login", loginRoutes);
+app.use("/mongo-items", mongoItemsRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor en ejecución en el puerto ${PORT}`);
+  console.log(`🚀 Servidor en ejecución en el puerto ${PORT}`);
 });
