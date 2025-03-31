@@ -1,5 +1,6 @@
+// controllers/login.controllers.js
 const { sql, poolPromise } = require("../config/db");
-const bcrypt = require("bcrypt");
+const { hashPassword, verifyPassword, generateSalt } = require("../utils/hash");
 
 // Obtener todos los usuarios
 const getUsers = async (req, res) => {
@@ -28,7 +29,7 @@ const loginUser = async (req, res) => {
     }
 
     const user = result.recordset[0];
-    const passwordMatch = await bcrypt.compare(Password, user.PasswordHash);
+    const passwordMatch = verifyPassword(Password, user.PasswordHash);
 
     if (!passwordMatch) {
       return res.status(401).json({ message: "Credenciales incorrectas" });
@@ -36,7 +37,12 @@ const loginUser = async (req, res) => {
 
     res.json({
       message: "Login exitoso",
-      user: { UserID: user.UserID, FirstName: user.FirstName, LastName: user.LastName, Email: user.Email }
+      user: {
+        UserID: user.UserID,
+        FirstName: user.FirstName,
+        LastName: user.LastName,
+        Email: user.Email,
+      },
     });
   } catch (err) {
     res.status(500).send(err.message);
@@ -47,7 +53,9 @@ const loginUser = async (req, res) => {
 const registerUser = async (req, res) => {
   try {
     const { FirstName, LastName, Email, Password } = req.body;
-    const hashedPassword = await bcrypt.hash(Password, 10);
+
+    const salt = generateSalt();
+    const hashedPassword = hashPassword(Password, salt);
 
     const pool = await poolPromise;
     await pool
@@ -56,7 +64,9 @@ const registerUser = async (req, res) => {
       .input("LastName", sql.VarChar, LastName)
       .input("Email", sql.VarChar, Email)
       .input("PasswordHash", sql.VarChar, hashedPassword)
-      .query("INSERT INTO Users (FirstName, LastName, Email, PasswordHash, CreatedAt) VALUES (@FirstName, @LastName, @Email, @PasswordHash, GETDATE())");
+      .query(
+        "INSERT INTO Users (FirstName, LastName, Email, PasswordHash, CreatedAt) VALUES (@FirstName, @LastName, @Email, @PasswordHash, GETDATE())"
+      );
 
     res.status(201).json({ message: "Usuario registrado exitosamente" });
   } catch (err) {
