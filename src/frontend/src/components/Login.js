@@ -14,15 +14,25 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      console.log('Attempting login with:', { email, password });
       const response = await axios.post("http://localhost:3000/login", {
         Email: email,
         Password: password,
       });
 
-      localStorage.setItem("user", JSON.stringify(response.data.user)); // Guardar usuario
+      console.log('Login response:', response.data);
+
+      // Store both user data and token
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      localStorage.setItem("token", response.data.token);
+      
+      // Set default authorization header for future requests
+      axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+      
       navigate("/sql-dashboard");
     } catch (err) {
-      setError("Credenciales incorrectas. Inténtalo de nuevo.");
+      console.error('Login error:', err.response?.data || err.message);
+      setError(err.response?.data?.message || "Error al iniciar sesión. Inténtalo de nuevo.");
     }
   };
 
