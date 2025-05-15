@@ -16,7 +16,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <h1>CR Digital</h1>
+        <h1>Welcome to my Dashboard</h1>
       </div>
       <div className="navbar-menu">
         <button 

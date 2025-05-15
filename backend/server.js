@@ -10,7 +10,7 @@ app.use(cors());
 
 // Rutas iniciales
 app.get("/", (req, res) => {
-  res.send("Bienvenido a la API");
+  res.send("Bienvenido a la API de Enrique-Macias A01641402");
 });
 
 app.get("/marco", (req, res) => {
