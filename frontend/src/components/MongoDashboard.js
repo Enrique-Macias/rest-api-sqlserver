@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
 import "./Dashboard.css";
 
 const MongoDashboard = () => {
@@ -21,22 +22,25 @@ const MongoDashboard = () => {
   };
 
   return (
-    <div className="dashboard-container">
-      <h2>📊 Dashboard de MongoDB</h2>
-      <p>Mostrando datos almacenados en <strong>MongoDB Atlas</strong>.</p>
+    <>
+      <Navbar />
+      <div className="dashboard-container">
+        <div className="dashboard-header">
+          <div>
+            <h2>📊 Dashboard de MongoDB</h2>
+            <p>Mostrando datos almacenados en <strong>MongoDB Atlas</strong>.</p>
+          </div>
+        </div>
 
-      <button className="switch-button" onClick={() => navigate("/sql-dashboard")}>
-        🔄 Ir al Dashboard de SQL Server
-      </button>
-
-      <ul>
-        {mongoItems.map((item, index) => (
-          <li key={index}>
-            {item.name} - {item.description} - ${item.price}
-          </li>
-        ))}
-      </ul>
-    </div>
+        <ul>
+          {mongoItems.map((item, index) => (
+            <li key={index}>
+              {item.name} - {item.description} - ${item.price}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 
