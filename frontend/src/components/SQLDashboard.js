@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { endpoints } from "../config/api";
 import "./Dashboard.css";
 
 const SQLDashboard = () => {
@@ -23,13 +24,9 @@ const SQLDashboard = () => {
   // Configure axios defaults
   axios.defaults.headers.common["Authorization"] = `Bearer ${getAuthToken()}`;
 
-  useEffect(() => {
-    fetchItems();
-  }, []);
-
-  const fetchItems = async () => {
+  const fetchItems = useCallback(async () => {
     try {
-      const response = await axios.get("http://localhost:3000/items");
+      const response = await axios.get(endpoints.items);
       setItems(response.data);
     } catch (error) {
       console.error("Error fetching SQL items:", error);
@@ -38,7 +35,11 @@ const SQLDashboard = () => {
         navigate("/login");
       }
     }
-  };
+  }, [navigate]);
+
+  useEffect(() => {
+    fetchItems();
+  }, [fetchItems]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -52,9 +53,9 @@ const SQLDashboard = () => {
     e.preventDefault();
     try {
       if (selectedItem) {
-        await axios.put(`http://localhost:3000/items/${selectedItem.ItemID}`, formData);
+        await axios.put(`${endpoints.items}/${selectedItem.ItemID}`, formData);
       } else {
-        await axios.post("http://localhost:3000/items", formData);
+        await axios.post(endpoints.items, formData);
       }
       setShowForm(false);
       setSelectedItem(null);
@@ -73,7 +74,7 @@ const SQLDashboard = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this item?")) {
       try {
-        await axios.delete(`http://localhost:3000/items/${id}`);
+        await axios.delete(`${endpoints.items}/${id}`);
         fetchItems();
       } catch (error) {
         console.error("Error deleting item:", error);
