@@ -93,10 +93,26 @@ const SQLDashboard = () => {
     setShowForm(true);
   };
 
+  const handleLogout = () => {
+    // Limpiar el token
+    localStorage.removeItem("token");
+    // Limpiar el header de autorización
+    delete axios.defaults.headers.common["Authorization"];
+    // Redirigir al login
+    navigate("/login");
+  };
+
   return (
     <div className="dashboard-container">
-      <h2>📊 Dashboard de SQL Server</h2>
-      <p>Mostrando datos almacenados en <strong>Microsoft SQL Server</strong>.</p>
+      <div className="dashboard-header">
+        <div>
+          <h2>📊 Dashboard de SQL Server</h2>
+          <p>Mostrando datos almacenados en <strong>Microsoft SQL Server</strong>.</p>
+        </div>
+        <button className="logout-button" onClick={handleLogout}>
+          Cerrar Sesión
+        </button>
+      </div>
 
       <button className="switch-button" onClick={() => navigate("/mongo-dashboard")}>
         🔄 Ir al Dashboard de MongoDB

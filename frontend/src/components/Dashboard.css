@@ -7,16 +7,38 @@
   .dashboard-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .dashboard-header h2 {
+    margin: 0;
+    color: #253C4F;
+  }
+  
+  .dashboard-header p {
+    margin: 5px 0 0 0;
+    color: #555;
   }
   
   .logout-button {
-    background: #ac1754;
+    background-color: #ac1754;
     color: white;
     border: none;
-    padding: 10px 15px;
-    cursor: pointer;
+    padding: 10px 20px;
     border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-button:hover {
+    background-color: #8a1344;
   }
   
   .add-button {
