@@ -46,7 +46,6 @@ const Navbar = () => {
           onClick={() => navigate('/profile')}
         >
           <FaUser className="nav-icon" />
-          Perfil
         </button>
         <button 
           className="nav-button logout"

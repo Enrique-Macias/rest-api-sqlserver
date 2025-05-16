@@ -109,7 +109,7 @@ const SQLDashboard = () => {
       <div className="dashboard-container">
         <div className="dashboard-header">
           <div>
-            <h2>📊 Dashboard de SQL Server</h2>
+            <h2>Dashboard de SQL Server</h2>
             <p>Mostrando datos almacenados en <strong>Microsoft SQL Server</strong>.</p>
           </div>
         </div>

@@ -27,7 +27,7 @@ const MongoDashboard = () => {
       <div className="dashboard-container">
         <div className="dashboard-header">
           <div>
-            <h2>📊 Dashboard de MongoDB</h2>
+            <h2>Dashboard de MongoDB</h2>
             <p>Mostrando datos almacenados en <strong>MongoDB Atlas</strong>.</p>
           </div>
         </div>
