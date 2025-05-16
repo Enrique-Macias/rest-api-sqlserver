@@ -52,11 +52,16 @@
 .nav-button.logout {
   background: #ac1754;
   border-color: #ac1754;
+  padding: 0.5rem;
 }
 
 .nav-button.logout:hover {
   background: #8a1344;
   border-color: #8a1344;
+}
+
+.nav-icon {
+  font-size: 1.2rem;
 }
 
 /* Ajuste para el contenido principal */
@@ -81,5 +86,9 @@
   .nav-button {
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
+  }
+
+  .nav-button.logout {
+    padding: 0.4rem;
   }
 } 

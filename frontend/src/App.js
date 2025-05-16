@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Dashboard from "./components/SQLDashboard";
 import MongoDashboard from "./components/MongoDashboard";
 import Register from "./components/Register";
+import Profile from "./components/Profile";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/sql-dashboard" element={<Dashboard />} />
         <Route path="/mongo-dashboard" element={<MongoDashboard />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );

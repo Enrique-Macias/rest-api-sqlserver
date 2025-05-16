@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { FaSignOutAlt, FaUser } from 'react-icons/fa';
 import axios from 'axios';
 import './Navbar.css';
 
@@ -17,11 +18,10 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     delete axios.defaults.headers.common["Authorization"];
     navigate("/login");
   };
-
-  
 
   return (
     <nav className="navbar">
@@ -42,10 +42,18 @@ const Navbar = () => {
           MongoDB Datos
         </button>
         <button 
+          className={`nav-button ${location.pathname === '/profile' ? 'active' : ''}`}
+          onClick={() => navigate('/profile')}
+        >
+          <FaUser className="nav-icon" />
+          Perfil
+        </button>
+        <button 
           className="nav-button logout"
           onClick={handleLogout}
+          title="Cerrar Sesión"
         >
-          Cerrar Sesión
+          <FaSignOutAlt className="nav-icon" />
         </button>
       </div>
     </nav>
