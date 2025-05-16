@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './Navbar.css';
@@ -6,6 +6,14 @@ import './Navbar.css';
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -13,29 +21,31 @@ const Navbar = () => {
     navigate("/login");
   };
 
+  
+
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <h1>Welcome to my Dashboard</h1>
+        <h1>Bienvenido {user ? `${user.FirstName} ${user.LastName}` : "Usuario"}!</h1>
       </div>
       <div className="navbar-menu">
         <button 
           className={`nav-button ${location.pathname === '/sql-dashboard' ? 'active' : ''}`}
           onClick={() => navigate('/sql-dashboard')}
         >
-          📊 SQL Dashboard
+          SQL Datos
         </button>
         <button 
           className={`nav-button ${location.pathname === '/mongo-dashboard' ? 'active' : ''}`}
           onClick={() => navigate('/mongo-dashboard')}
         >
-          🍃 MongoDB Dashboard
+          MongoDB Datos
         </button>
         <button 
           className="nav-button logout"
           onClick={handleLogout}
         >
-          🚪 Cerrar Sesión
+          Cerrar Sesión
         </button>
       </div>
     </nav>

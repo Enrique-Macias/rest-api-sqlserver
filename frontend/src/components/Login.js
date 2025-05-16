@@ -17,7 +17,7 @@ const Login = () => {
         Email: email,
         Password: password,
       });
-
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       localStorage.setItem("token", response.data.token);
       axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
       navigate("/sql-dashboard");
@@ -52,6 +52,14 @@ const Login = () => {
           {error && <p className="error-message">{error}</p>}
           <button type="submit" className="login-button">
             Ingresar
+          </button>
+          <button
+            type="button"
+            className="login-button"
+            style={{ marginTop: 10, background: '#ac1754' }}
+            onClick={() => navigate('/register')}
+          >
+            Registrarse
           </button>
         </form>
       </div>

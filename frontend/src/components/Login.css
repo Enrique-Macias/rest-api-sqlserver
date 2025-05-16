@@ -92,6 +92,34 @@
   .register-link a:hover {
     text-decoration: underline;
   }
+
+  .success-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #e6f9ed;
+    color: #218838;
+    border: 1.5px solid #b7ebc9;
+    border-radius: 6px;
+    padding: 12px 18px;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(33, 136, 56, 0.07);
+    animation: fadeIn 0.7s;
+  }
+  
+  .success-message .checkmark {
+    font-size: 20px;
+    font-weight: bold;
+    color: #27ae60;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px);}
+    to { opacity: 1; transform: translateY(0);}
+  }
   
   /* Responsivo */
   @media (max-width: 480px) {
