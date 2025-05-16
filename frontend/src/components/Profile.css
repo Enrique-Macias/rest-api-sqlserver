@@ -5,6 +5,7 @@
   min-height: calc(100vh - 64px);
   padding: 2rem;
   background-color: #f5f5f5;
+  margin-top: 64px; /* Add margin to account for fixed navbar */
 }
 
 .profile-card {
@@ -24,7 +25,7 @@
 .profile-avatar {
   width: 100px;
   height: 100px;
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  background: linear-gradient(135deg, #253c4f, #ac1754);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -37,7 +38,7 @@
 }
 
 .profile-header h2 {
-  color: #333;
+  color: #253c4f;
   margin: 0;
   font-size: 1.5rem;
 }
@@ -55,15 +56,17 @@
   background: #f8f9fa;
   border-radius: 8px;
   transition: transform 0.2s ease;
+  border: 1px solid rgba(37, 60, 79, 0.1);
 }
 
 .info-item:hover {
   transform: translateX(5px);
+  border-color: #253c4f;
 }
 
 .info-icon {
   font-size: 1.5rem;
-  color: #6e8efb;
+  color: #253c4f;
   margin-right: 1rem;
 }
 
@@ -79,7 +82,7 @@
 }
 
 .info-content span {
-  color: #333;
+  color: #253c4f;
   font-weight: 500;
 }
 
@@ -89,5 +92,6 @@
   align-items: center;
   min-height: calc(100vh - 64px);
   font-size: 1.2rem;
-  color: #666;
+  color: #253c4f;
+  margin-top: 64px; /* Add margin to account for fixed navbar */
 } 
