@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { endpoints } from "../config/api";
 import Navbar from "./Navbar";
 import "./Dashboard.css";
@@ -198,7 +198,11 @@ const SQLDashboard = () => {
             <tbody>
               {items.map((item) => (
                 <tr key={item.ItemID}>
-                  <td>{item.ItemName}</td>
+                  <td>
+                    <Link to={`/items/${item.ItemID}`} className="item-link">
+                      {item.ItemName}
+                    </Link>
+                  </td>
                   <td>{item.Description}</td>
                   <td>${item.Price}</td>
                   <td>{item.Stock}</td>

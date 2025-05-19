@@ -6,6 +6,7 @@ import Dashboard from "./components/SQLDashboard";
 import MongoDashboard from "./components/MongoDashboard";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
+import ItemInfo from "./components/ItemInfo";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/sql-dashboard" element={<Dashboard />} />
         <Route path="/mongo-dashboard" element={<MongoDashboard />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/items/:id" element={<ItemInfo />} />
       </Routes>
     </Router>
   );

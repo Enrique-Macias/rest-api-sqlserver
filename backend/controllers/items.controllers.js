@@ -11,6 +11,26 @@ const getItems = async (req, res) => {
   }
 };
 
+// Obtener un item por ID
+const getItemById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const pool = await poolPromise;
+    const result = await pool
+      .request()
+      .input("ItemID", sql.Int, id)
+      .query("SELECT * FROM Items WHERE ItemID = @ItemID");
+
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ message: "Item no encontrado" });
+    }
+
+    res.json(result.recordset[0]);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
 // Crear un nuevo item
 const createItem = async (req, res) => {
   try {
@@ -76,4 +96,4 @@ const deleteItem = async (req, res) => {
   }
 };
 
-module.exports = { getItems, createItem, updateItem, deleteItem };
+module.exports = { getItems, getItemById, createItem, updateItem, deleteItem };

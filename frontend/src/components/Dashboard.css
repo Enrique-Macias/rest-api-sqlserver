@@ -209,3 +209,19 @@
     background-color: #1E2B3A;
   }
   
+  .item-link {
+    color: #253c4f;
+    text-decoration: underline;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    display: inline-block;
+    padding: 2px 4px;
+    border-radius: 4px;
+  }
+  
+  .item-link:hover {
+    color: #ac1754;
+    background: rgba(172, 23, 84, 0.1);
+    text-decoration: none;
+  }
+  
