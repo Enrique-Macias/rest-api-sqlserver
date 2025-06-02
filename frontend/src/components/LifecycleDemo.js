@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Navbar from './Navbar';
+import { FaPlayCircle, FaSyncAlt, FaPowerOff, FaExclamationTriangle } from 'react-icons/fa';
 import './LifecycleDemo.css';
 
 const LifecycleDemo = () => {
@@ -35,36 +37,45 @@ const LifecycleDemo = () => {
 
   if (!mounted) {
     return (
-      <div className="lifecycle-demo">
-        <h2>Componente Desmontado</h2>
-        <button onClick={handleToggleMount}>
-          Remontar Componente
-        </button>
-      </div>
+      <>
+        <Navbar />
+        <div className="lifecycle-demo">
+          <h2>Componente Desmontado</h2>
+          <button onClick={handleToggleMount}>
+            Remontar Componente
+          </button>
+        </div>
+      </>
     );
   }
 
   return (
-    <div className="lifecycle-demo">
-      <h2>Demostración del Ciclo de Vida</h2>
-      <p>Contador: {count}</p>
-      <div className="lifecycle-buttons">
-        <button onClick={handleIncrement}>
-          Incrementar Contador
-        </button>
-        <button onClick={handleToggleMount}>
-          Desmontar Componente
-        </button>
+    <>
+      <Navbar />
+      <div className="lifecycle-demo">
+        <h2>Demostración del Ciclo de Vida</h2>
+        <p>Contador: {count}</p>
+        <div className="lifecycle-buttons">
+          <button onClick={handleIncrement}>
+            Incrementar Contador
+          </button>
+          <button onClick={handleToggleMount}>
+            Desmontar Componente
+          </button>
+        </div>
+        <div className="lifecycle-info">
+          <p style={{ color: '#ac1754', fontWeight: 500, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: 8 }}>
+            <FaExclamationTriangle style={{ color: '#f7b731' }} />
+            Abre la consola del navegador para ver los logs del ciclo de vida
+          </p>
+          <ul>
+            <li><FaPlayCircle className="lifecycle-icon mount" /> Montaje: Cuando el componente se crea</li>
+            <li><FaSyncAlt className="lifecycle-icon update" /> Actualización: Cuando el componente se actualiza</li>
+            <li><FaPowerOff className="lifecycle-icon unmount" /> Desmontaje: Cuando el componente se elimina</li>
+          </ul>
+        </div>
       </div>
-      <div className="lifecycle-info">
-        <p>⚠️ Abre la consola del navegador para ver los logs del ciclo de vida</p>
-        <ul>
-          <li>🟢 Montaje: Cuando el componente se crea</li>
-          <li>🔄 Actualización: Cuando el componente se actualiza</li>
-          <li>🔴 Desmontaje: Cuando el componente se elimina</li>
-        </ul>
-      </div>
-    </div>
+    </>
   );
 };
 
