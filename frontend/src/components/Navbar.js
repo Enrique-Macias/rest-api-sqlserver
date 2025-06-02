@@ -1,27 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { FaSignOutAlt, FaUser } from 'react-icons/fa';
+import { FaSignOutAlt, FaUser, FaCode } from 'react-icons/fa';
 import axios from 'axios';
+import useAuth from '../hooks/useAuth';
 import './Navbar.css';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const userData = localStorage.getItem("user");
-    if (userData) {
-      setUser(JSON.parse(userData));
-    }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    delete axios.defaults.headers.common["Authorization"];
-    navigate("/login");
-  };
+  const { user, logout } = useAuth();
 
   return (
     <nav className="navbar">
@@ -42,14 +29,22 @@ const Navbar = () => {
           MongoDB Datos
         </button>
         <button 
+          className={`nav-button ${location.pathname === '/lifecycle-demo' ? 'active' : ''}`}
+          onClick={() => navigate('/lifecycle-demo')}
+          title="Demo del Ciclo de Vida"
+        >
+          <FaCode className="nav-icon" />
+        </button>
+        <button 
           className={`nav-button ${location.pathname === '/profile' ? 'active' : ''}`}
           onClick={() => navigate('/profile')}
+          title="Perfil"
         >
           <FaUser className="nav-icon" />
         </button>
         <button 
           className="nav-button logout"
-          onClick={handleLogout}
+          onClick={logout}
           title="Cerrar Sesión"
         >
           <FaSignOutAlt className="nav-icon" />

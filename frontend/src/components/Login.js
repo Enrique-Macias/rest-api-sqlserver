@@ -1,28 +1,20 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 import "./Login.css";
-import { endpoints } from "../config/api";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const { login, error } = useAuth();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(endpoints.login, {
-        Email: email,
-        Password: password,
-      });
-      localStorage.setItem("user", JSON.stringify(response.data.user));
-      localStorage.setItem("token", response.data.token);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-      navigate("/sql-dashboard");
-    } catch (err) {
-      setError(err.response?.data?.message || "Error al iniciar sesión. Inténtalo de nuevo.");
+    const result = await login(email, password);
+    if (!result.success) {
+      // El error ya está manejado por el hook useAuth
+      return;
     }
   };
 

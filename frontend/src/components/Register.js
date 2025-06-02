@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { endpoints } from "../config/api";
+import useAuth from "../hooks/useAuth";
 import "./Login.css";
 
 const Register = () => {
@@ -11,8 +10,8 @@ const Register = () => {
     Email: "",
     Password: ""
   });
-  const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const { register, error } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -21,14 +20,11 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
     setSuccess("");
-    try {
-      await axios.post(endpoints.register || `${endpoints.login.replace('/login','')}/register`, form);
+    const result = await register(form);
+    if (result.success) {
       setSuccess("Usuario registrado exitosamente. Redirigiendo al login...");
       setTimeout(() => navigate("/login"), 2000);
-    } catch (err) {
-      setError(err.response?.data?.message || "Error al registrar. Intenta de nuevo.");
     }
   };
 
@@ -86,7 +82,13 @@ const Register = () => {
           )}
           <button type="submit" className="login-button">Registrarse</button>
         </form>
-        <button className="login-button" style={{marginTop: 10, background: '#ac1754'}} onClick={() => navigate('/login')}>Volver al Login</button>
+        <button 
+          className="login-button" 
+          style={{marginTop: 10, background: '#ac1754'}} 
+          onClick={() => navigate('/login')}
+        >
+          Volver al Login
+        </button>
       </div>
     </div>
   );

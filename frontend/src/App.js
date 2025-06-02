@@ -7,6 +7,7 @@ import MongoDashboard from "./components/MongoDashboard";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
 import ItemInfo from "./components/ItemInfo";
+import LifecycleDemo from "./components/LifecycleDemo";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/mongo-dashboard" element={<MongoDashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/items/:id" element={<ItemInfo />} />
+        <Route path="/lifecycle-demo" element={<LifecycleDemo />} />
       </Routes>
     </Router>
   );
